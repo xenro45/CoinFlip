@@ -17,12 +17,12 @@ public class ButtonEffects {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                SoundPlayer.playsound("resources/rollover2.wav");
+                SoundPlayer.play("resources/rollover2.wav");
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                SoundPlayer.playsound("resources/rollover2.wav");
+                SoundPlayer.play("resources/rollover2.wav");
             }
         });
     }

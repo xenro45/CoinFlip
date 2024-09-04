@@ -3,9 +3,9 @@ import java.io.IOException;
 import java.net.URL;
 
 public class SoundPlayer {
-    public static void playsound(String path) {
-        URL soundFile = SoundPlayer.class.getResource(path);
-        if (soundFile == null) {
+    public static void play(String path) {
+        URL file = SoundPlayer.class.getResource(path);
+        if (file == null) {
             System.out.println("Error, Invalid Sound File");
             return;
         }
