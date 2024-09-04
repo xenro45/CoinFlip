@@ -1,70 +1,89 @@
-    import javax.swing.*;
-    import java.awt.*;
-    import java.awt.event.ActionEvent;
-    import java.awt.event.ActionListener;
-    import java.util.Random;
-    public class Main {
-        private JFrame frame;
-        private JButton flipbutton;
-        private JLabel resultlabel;
-        private ImageIcon heads;
-        private ImageIcon tails;
-        private ImageIcon buttonicon;
-        private Random random;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
 
-        public Main() {
-            heads = new ImageIcon(getClass().getResource("/resources/Heads.png"));
-            tails = new ImageIcon(getClass().getResource("/resources/Tails.png"));
-            buttonicon = new ImageIcon(getClass().getResource("/resources/Button.png"));
+public class Main {
+    private JFrame frame;
+    private JButton flipbutton;
+    private JLabel resultlabel;
+    private ImageIcon heads;
+    private ImageIcon tails;
+    private ImageIcon buttonicon;
+    private Random random;
+    private JLabel buttontext;
+    private JLabel credits;
 
-            frame = new JFrame("Coin Flip");
-            frame.getContentPane().setBackground(new Color(179, 179, 179));
-            frame.setPreferredSize(new Dimension(500, 500));
-            frame.setMinimumSize(new Dimension(300, 300));
-            frame.setMaximumSize(new Dimension(300,300));
-            frame.setForeground(new Color(0, 0 ,0));
+    public Main() {
+        heads = new ImageIcon(getClass().getResource("/resources/Heads.png"));
+        tails = new ImageIcon(getClass().getResource("/resources/Tails.png"));
+        buttonicon = new ImageIcon(getClass().getResource("/resources/Button.png"));
+        credits = new JLabel();
 
-            flipbutton = new JButton("");
-            flipbutton.setIcon(buttonicon);
-            flipbutton.setBorderPainted(false);
-            flipbutton.setPreferredSize(new Dimension(100, 90));
-            flipbutton.setFocusPainted(false);
+        frame = new JFrame("Coin Flip");
+        frame.setPreferredSize(new Dimension(500, 500));
+        frame.setMinimumSize(new Dimension(300, 300));
+        frame.setMaximumSize(new Dimension(300,300));
 
-            resultlabel = new JLabel(heads);
+        flipbutton = new JButton("");
+        flipbutton.setIcon(buttonicon);
+        flipbutton.setBorderPainted(false);
+        flipbutton.setPreferredSize(new Dimension(100, 90));
+        flipbutton.setFocusPainted(false);
+
+        resultlabel = new JLabel(heads);
+
+        random = new Random();
+        flipbutton.setLayout(new BorderLayout());
+        buttontext = new JLabel("Flip");
+        flipbutton.add(buttontext, BorderLayout.CENTER);
 
 
-            random = new Random();
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setLayout(new BorderLayout());
-            frame.add(flipbutton, BorderLayout.SOUTH);
-            frame.add(resultlabel, BorderLayout.CENTER);
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setBackground(new Color(0x8A8A8A));
+        frame.setLayout(new BorderLayout());
+        frame.add(flipbutton, BorderLayout.SOUTH);
+        frame.add(resultlabel, BorderLayout.CENTER);
+
+        buttontext = new JLabel("Flip Coin");
+        buttontext.setHorizontalAlignment(SwingConstants.CENTER);
+        buttontext.setFont(new Font("Minecraft", Font.PLAIN, 45));
+
+        credits.setFont(new Font("Minecraft", Font.PLAIN, 30));
+        credits.setText("@Xenro45");
+        frame.add(credits, BorderLayout.NORTH);
 
 
-            flipbutton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    flipCoin();
-                }
-            });
+        flipbutton.add(buttontext);
 
-            frame.setVisible(true);
-        }
-
-        private void flipCoin() {
-            boolean bool = random.nextBoolean();
-            if (bool) {
-                resultlabel.setIcon(heads);
-            } else {
-                resultlabel.setIcon(tails);
+        flipbutton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                flipCoin();
             }
-        }
+        });
 
-        public static void main(String[] args) {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    new Main();
-                }
-            });
+        new ButtonEffects(flipbutton);
+        frame.setVisible(true);
+    }
+
+    private void flipCoin() {
+        boolean bool = random.nextBoolean();
+        if (bool) {
+            resultlabel.setIcon(heads);
+        } else {
+            resultlabel.setIcon(tails);
         }
     }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new Main();
+            }
+        });
+    }
+}
