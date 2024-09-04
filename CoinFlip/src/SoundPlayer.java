@@ -10,7 +10,7 @@ public class SoundPlayer {
             return;
         }
         try {
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
             clip.start();
